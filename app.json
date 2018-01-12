@@ -1,0 +1,12 @@
+{
+  "pages": [
+       "pages/index/index",
+       "pages/add-order/add-order",
+       "pages/back-order/back-order",
+       "pages/myinfo/myinfo",
+       "pages/add-replenish/add-replenish"
+  ],
+  "window": {
+    "defaultTitle": "智能售货柜"
+  }
+}

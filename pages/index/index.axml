@@ -1,0 +1,42 @@
+<view class="container">
+  <view class="main-wrapper">
+    <view class="main-container">
+      <view class="container-box">
+        <view class="box-logo">
+          <image src="/image/main.png" mode="widthFix" style="width:100%"/>
+        </view>
+        <view class="box-button">
+          <view class="box-margin">
+            <button type="primary"> 开门 </button>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="main-menu">
+      <view class="menu-line"></view>
+      <view class="menu-box">
+        <view class="box-container" onTap="toMyinfo">
+          <view class="box-icon">
+            <view class="iconfont icon-xinxi" style="font-size:1.4rem;color:#108ee9"></view>
+            <view class="button_text">我的信息</view>
+          </view>
+        </view>
+        <view class="box-container" onTap="toOrder">
+          <view class="box-icon">
+            <view class="iconfont icon-dingdan" style="font-size:1.4rem;color:#31af08"></view>
+            <view class="button_text">我的订单</view>
+          </view>
+        </view>
+        <view class="box-container" onTap="toReplenish">
+          <view class="box-icon">
+            <view class="iconfont icon-buhuo" style="font-size:1.4rem;color:#f4ea2a"></view>
+            <view class="button_text">补货</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  
+</view>
+
