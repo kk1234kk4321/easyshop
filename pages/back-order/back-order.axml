@@ -51,13 +51,13 @@
             <view class="mod-text">上传凭证</view>
             <view class="mod-photouploader-list">
                 <view class="mod-ul">
+                    <input name="paths" type="text" style="display:none" value={{path}}></input>
                     <view class="mod-li" a:for="{{path}}" a:for-item="item" a:for-index="idx">
                         <image src="{{item}}" mode="scaleToFill" data-url={{item}} onTap="showImg" />
                         <view class="iconfont icon-iconfontroundclosefill close-btn" data-idx={{idx}} onTap="removeImg"></view>
                     </view>
                 </view>
-                <view class="mod-photouploader-input" a:if="{{path.length
-                    <3}}">
+                <view class="mod-photouploader-input" a:if="{{path.length<3}}">
                         <view class="iconfont icon-shangchuanzhaopian" style="font-size:0.7rem;color:#999" onTap="uploadImg"></view>
                         <view class="upload-text">上传凭证</view>
                         <view class="upload-text">(最多3张)</view>

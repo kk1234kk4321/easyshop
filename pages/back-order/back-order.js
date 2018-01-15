@@ -1,28 +1,28 @@
 const app = getApp();
 Page({
 
-  data: {
-    path: []
+  data:{
+    path:[]
   },
   onLoad(res) {
-
-    var addColor = '#A9A9A9';
-    var minusColor = '#A9A9A9';
-    if (res.currCount < res.count) {
-      addColor = 'black';
+    
+    var addColor='#A9A9A9';
+    var minusColor='#A9A9A9';
+    if(res.currCount<res.count){
+      addColor='black';
     }
-    if (res.currCount > 0 && res.currCount <= res.count) {
-      minusColor = 'black'
+    if(res.currCount>0&&res.currCount<=res.count){
+      minusColor='black'
     }
-
+    
     this.setData({
-      data: res,
-      addColor: addColor,
-      minusColor: minusColor,
-    });
-
+        data:res,
+        addColor:addColor,
+        minusColor:minusColor,
+      });
+      
   },
-  add(event) {
+  add(event){
     var data = event.target.dataset;
     var count = data.count;
     var unitPrice = data.unitPrice;
@@ -30,34 +30,37 @@ Page({
     var currCount = data.currCount;
     var currPrice = data.currPrice;
 
-    if (currCount < count) {
-      currCount = currCount + 1;
-      currPrice = parseFloat(currPrice) + parseFloat(unitPrice);
+    if(currCount<count){
+      currCount=currCount+1;
+      currPrice = parseFloat(currPrice)+parseFloat(unitPrice);
       data.currCount = currCount;
       data.currPrice = currPrice;
       this.onLoad(data);
     }
 
   },
-  minus(event) {
+  minus(event){
     var data = event.target.dataset;
     var count = data.count;
     var unitPrice = data.unitPrice;
     var totalPrice = data.totalPrice;
     var currCount = data.currCount;
     var currPrice = data.currPrice;
-
-    if (currCount > 0 && currCount <= count) {
-      currCount = currCount - 1;
-      currPrice = currPrice - unitPrice;
+    
+    if(currCount>0&&currCount<=count){
+      currCount=currCount-1;
+      currPrice=currPrice-unitPrice;
       data.currCount = currCount;
       data.currPrice = currPrice;
       this.onLoad(data);
     }
-
+    
   },
-  formSubmit(e) {
-    var formData = e.detail.value;
+  formSubmit(e){
+    var formData = e.detail.value; 
+    //console.log('e='+e.detail.value);
+    //console.log('paths='+formData.paths);
+    //console.log('formData='+formData);
     my.showToast({
       title: '提交成功',
       icon: 'loading',
