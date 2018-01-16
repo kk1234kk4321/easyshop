@@ -1,4 +1,5 @@
 <form onSubmit="formSubmit" onReset="formReset">
+    <input name="orderId" type="text" style="display:none" value={{data.orderId}}></input>
     <input name="id" type="text" style="display:none" value={{data.id}}></input>
     <input name="name" type="text" style="display:none" value={{data.name}}></input>
     <input name="price" type="text" style="display:none" value={{data.currPrice}}></input>
@@ -11,6 +12,7 @@
                 <view style="width:40%">
                 <text class="iconfont icon-jia2"  
                       style="font-size:0.6rem;color:{{addColor}}" 
+                      data-order-id={{data.orderId}}
                       data-id={{data.id}}
                       data-name={{data.name}}
                       data-count={{data.count}}
@@ -27,6 +29,7 @@
                 <view style="width:40%">
                 <text class="iconfont icon-minus"  
                       style="font-size:0.6rem;color:{{minusColor}}" 
+                      data-order-id={{data.orderId}}                      
                       data-id={{data.id}}
                       data-name={{data.name}}
                       data-count={{data.count}}

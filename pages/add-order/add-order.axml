@@ -16,6 +16,7 @@
             <view class="right">
                 <view class="back-text" a:if={{itemY.isBack==2}} >退款成功</view>
                 <view a:elif={{itemY.isBack==0}} 
+                      data-order-id={{itemX.orderId}}
                       data-id={{itemY.id}}
                       data-name={{itemY.goodsName}}
                       data-count={{itemY.count}}

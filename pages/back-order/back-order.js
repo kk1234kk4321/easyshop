@@ -1,4 +1,5 @@
 const app = getApp();
+
 Page({
 
   data:{
@@ -58,18 +59,81 @@ Page({
   },
   formSubmit(e){
     var formData = e.detail.value; 
-    //console.log('e='+e.detail.value);
-    //console.log('paths='+formData.paths);
-    //console.log('formData='+formData);
-    my.showToast({
-      title: '提交成功',
-      icon: 'loading',
-      duration: 1500
-    })
-    my.navigateBack({
-      delta: 1
-    })
+    console.log('form发生了submit事件，携带数据为：', e.detail.value);
+
+    var successUp = 0; //成功个数
+    var failUp = 0; //失败个数
+    var len = formData.paths.length; //总共个数
+    var i = 0; //第几个
+    if(len>0){
+      this.uploadDIY(formData.paths,successUp,failUp,i,len);
+    }
+    
+    my.httpRequest({  
+      url: 'http://localhost:8080/JobImg',  
+      method: 'POST',
+      data: formData,  
+      header: {  
+          'Content-Type': 'application/json'  
+      },  
+      success: function(res) {  
+        console.log('表单提交成功数据：',res.data)  
+        my.alert({
+          content: '提交成功'
+        })
+        my.navigateBack({
+          delta: 1
+        })
+      },
+      fail:function(res){
+        console.log('表单提交失败数据：',res.data) 
+        my.alert({
+          content: '提交失败，请重新操作'
+        })
+      }  
+    })  
+
   },
+
+  /* 函数描述：作为上传文件时递归上传的函数体体；
+   * 参数描述： 
+   * filePaths是文件路径数组
+   * successUp是成功上传的个数
+   * failUp是上传失败的个数
+   * i是文件路径数组的指标
+   * length是文件路径数组的长度
+   */      
+    uploadDIY(filePaths,successUp,failUp,i,length){
+      my.uploadFile({
+                    url: 'http://localhost:8080/JobImg', 
+                    filePath: filePaths[i],
+                    fileName: Date.parse(new Date()),
+                    fileType:'image',
+                    /*formData:{
+                      'pictureUid': owerId,
+                      'pictureAid': albumId
+                    },*/
+                    success: (resp) => {
+                      console.log("resp数据：",resp);
+                        successUp++;
+                    },
+                    fail: (res) => {
+                        failUp ++;
+                    },
+                    complete: () => {
+                        i ++;                        
+                        if(i == length)
+                        {                      
+                          //my.alert({content:'总共'+successUp+'张上传成功,'+failUp+'张上传失败！'});
+                        }
+                        else
+                        {  //递归调用uploadDIY函数
+                            this.uploadDIY(filePaths,successUp,failUp,i,length);
+                        }
+                    },
+                });
+  },
+
   uploadImg() {
     var path = this.data.path;
     my.chooseImage({
@@ -82,6 +146,12 @@ Page({
         this.setData({
           "path": path
         })
+
+       // var successUp = 0; //成功个数
+       // var failUp = 0; //失败个数
+       // var len = res.apFilePaths.length; //总共个数
+       // var i = 0; //第几个
+       // this.uploadDIY(res.apFilePaths,successUp,failUp,i,len);
       },
     });
   },

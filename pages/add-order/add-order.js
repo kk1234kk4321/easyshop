@@ -15,8 +15,7 @@ Page({
       url: '/pages/back-order/back-order?id='+data.id+'&name='+data.name+
             '&count='+data.count+'&unitPrice='+data.unitPrice+
             '&totalPrice='+data.totalPrice+'&currCount='+data.count+
-            '&currPrice='+data.totalPrice,
+            '&currPrice='+data.totalPrice+'&orderId='+data.orderId,
     });
-    //alert(data.id+":"+data.name);
   }
 });
