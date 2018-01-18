@@ -70,28 +70,27 @@ Page({
     }
     
     my.httpRequest({  
-      url: 'http://localhost:8080/JobImg',  
-      method: 'POST',
-      data: formData,  
-      header: {  
-          'Content-Type': 'application/json'  
-      },  
-      success: function(res) {  
-        console.log('表单提交成功数据：',res.data)  
-        my.alert({
-          content: '提交成功'
-        })
-        my.navigateBack({
-          delta: 1
-        })
-      },
-      fail:function(res){
-        console.log('表单提交失败数据：',res.data) 
-        my.alert({
-          content: '提交失败，请重新操作'
-        })
-      }  
-    })  
+        url: 'http://localhost:8080/Temp/formSubmit',  
+        data: formData,  
+        method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+        header: {
+          'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        }, 
+        success: function() {  
+          my.alert({
+            content: '操作成功！'
+          });
+          my.navigateBack({
+            delta: 1
+          });
+        },
+        fail:function(res){
+          //console.log('失败原因：',res.data);
+          my.alert({
+            content: '操作失败，请重新操作！'
+          });
+        }  
+    }); 
 
   },
 
@@ -105,7 +104,7 @@ Page({
    */      
     uploadDIY(filePaths,successUp,failUp,i,length){
       my.uploadFile({
-                    url: 'http://localhost:8080/JobImg', 
+                    url: 'http://localhost:8080/Temp/uploadFile', 
                     filePath: filePaths[i],
                     fileName: Date.parse(new Date()),
                     fileType:'image',
@@ -114,7 +113,6 @@ Page({
                       'pictureAid': albumId
                     },*/
                     success: (resp) => {
-                      console.log("resp数据：",resp);
                         successUp++;
                     },
                     fail: (res) => {
@@ -145,7 +143,7 @@ Page({
         }
         this.setData({
           "path": path
-        })
+        });
 
        // var successUp = 0; //成功个数
        // var failUp = 0; //失败个数
@@ -172,6 +170,6 @@ Page({
     path.splice(idx, 1)
     this.setData({
       "path": path
-    })
+    });
   }
 });

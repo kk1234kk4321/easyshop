@@ -4,6 +4,8 @@
        "pages/add-order/add-order",
        "pages/back-order/back-order",
        "pages/myinfo/myinfo",
+       "pages/shopping-over/shopping-over",
+       "pages/open-over/open-over",
        "pages/add-replenish/add-replenish"
   ],
   "window": {

@@ -1,0 +1,22 @@
+<view class="container">
+    <view class="main-wrapper">
+        <view class="main-container">
+        <view class="container-box">
+            <view class="head-text">
+                <view class="icon-text">
+                        <icon type="success" style="color:green" size="25"/>
+                        <text style="margin:10px;font-size:20px;color:green;">购物成功</text>
+                </view>
+                        <text style="margin:0px 20px 0px 50px;font-size:15px;color:grey;">
+                            请通过查看订单确认购物详情</text>
+            </view>
+            <view class="box-button">
+                    <view class="box-margin">
+                        <button type="primary" onTap="view"> 查看订单列表 </button>
+                    </view>
+            </view>
+        </view>
+        </view>
+    </view>  
+</view>
+
