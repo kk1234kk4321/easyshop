@@ -9,9 +9,9 @@ App({
     console.log('SDKVersion', my.SDKVersion);
 
 
-    my.connectSocket({
+   /* my.connectSocket({
       url: 'ws://localhost:8080/WebsocketHome/actions', // 开发者服务器接口地址，必须是 wss 协议，且域名必须是后台配置的合法域名
-    })
+    })*/
 
     my.onSocketClose((res) => {
       my.alert({ content: '服务器通信异常！' });
@@ -80,7 +80,8 @@ App({
   globalData: {
     authCode: "",
     deviceId:1000086,
-    boxId:1
+    boxId:1,
+    userType:1
   },
   userInfo: null,
 

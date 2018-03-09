@@ -1,10 +1,11 @@
 const app = getApp();
 
 Page({
-  
   onLoad() {
 
-
+    this.setData({
+        userType:app.globalData.userType,
+      });
   },
 
   toMyinfo(e){
