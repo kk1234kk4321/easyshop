@@ -1,6 +1,10 @@
 App({
   onLaunch(options) {
-    console.log('App Launch', options);
+    //my.alert({content: '启动参数：'+JSON.stringify(options.query)});
+    console.log('启动参数:App Launch', options);
+    if(options.query){
+      my.alert({content: '启动参数：'+JSON.stringify(options.query.x)});
+    }
     console.log('getSystemInfoSync', my.getSystemInfoSync());
     console.log('SDKVersion', my.SDKVersion);
   },
