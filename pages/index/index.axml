@@ -7,7 +7,7 @@
         </view>
         <view class="box-button">
           <view class="box-margin">
-            <button type="primary"> 开门 </button>
+            <button type="primary"  onTap="toWebSocket"> 开门 </button>
           </view>
         </view>
       </view>
