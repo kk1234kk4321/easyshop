@@ -7,6 +7,16 @@ Page({
     });
   },
   open(){
-      alert("补货员补货开门！");
+       let msg ={
+        "authcode": app.globalData.authCode,
+        "timestamp": Date.parse(new Date()),
+        "keepTime": "3600",
+        "deviceId":app.globalData.deviceId,
+        "boxId":app.globalData.boxId,
+        "cmd":300,//补货开门
+      }; 
+      my.sendSocketMessage({
+      data: JSON.stringify(msg)
+      });
   }
 });

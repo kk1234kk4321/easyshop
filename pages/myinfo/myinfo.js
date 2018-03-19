@@ -3,6 +3,7 @@ const app = getApp();
 Page({
   data: {},
   onLoad() {   
+
     app.getUserInfo().then(
       user => this.setData({
         user,
