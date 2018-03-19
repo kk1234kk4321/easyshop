@@ -40,6 +40,7 @@ App({
     authCode: "",
     deviceId:1000086,
     boxId:1,
+    userId:"",
     userType:1,
   },
   userInfo: null,
