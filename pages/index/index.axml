@@ -27,7 +27,7 @@
             <view class="button_text">我的订单</view>
           </view>
         </view>
-        <view class="box-container" onTap="toReplenish">
+        <view class="box-container" onTap="toReplenish" a:if={{userType==2}}>
           <view class="box-icon">
             <view class="iconfont icon-buhuo" style="font-size:1.4rem;color:#f4ea2a"></view>
             <view class="button_text">补货</view>

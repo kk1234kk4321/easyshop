@@ -1,6 +1,7 @@
 const app = getApp();
 
 Page({
+
   dd: function (signstr) {
     my.paySignCenter({
       signStr: signstr,

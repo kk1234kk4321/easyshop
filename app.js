@@ -38,9 +38,9 @@ App({
 
   globalData: {
     authCode: "",
-    deviceId: 1000086,
-    boxId: 1,
-    userId:""
+    deviceId:1000086,
+    boxId:1,
+    userType:1,
   },
   userInfo: null,
 
