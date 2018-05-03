@@ -1,6 +1,5 @@
 App({
-
-
+  
   onLaunch(options) {
     //my.alert({content: '启动参数：'+JSON.stringify(options.query)});
     //console.log('启动参数:App Launch', options);
@@ -12,7 +11,7 @@ App({
 
     my.connectSocket({
       //url: 'ws://localhost:8080/WebsocketHome/actions', // 开发者服务器接口地址，必须是 wss 协议，且域名必须是后台配置的合法域名
-      url: 'ws://192.168.1.160:8080/erpLife/socket/websocket'
+      url: 'ws://222.186.101.234:8090/erpLife/socket/websocket'
     })
 
   },
@@ -38,10 +37,10 @@ App({
 
   globalData: {
     authCode: "",
-    deviceId:1000086,
+    deviceId:99872212,
     boxId:1,
     userId:"",
-    userType:1,
+    userType:2,
   },
   userInfo: null,
 

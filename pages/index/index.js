@@ -2,6 +2,10 @@ const app = getApp();
 
 Page({
 
+   data: {
+    userType: app.globalData.userType
+  },
+  
   dd: function (signstr) {
     my.paySignCenter({
       signStr: signstr,
