@@ -78,3 +78,10 @@
     flex-direction: row;
     align-items: center;
 }
+
+.box-logo {
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

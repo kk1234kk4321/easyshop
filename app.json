@@ -4,9 +4,10 @@
        "pages/add-order/add-order",
        "pages/back-order/back-order",
        "pages/myinfo/myinfo",
-       "pages/shopping-over/shopping-over",
+       "pages/add-replenish/add-replenish",
        "pages/open-over/open-over",
-       "pages/add-replenish/add-replenish"
+       "pages/shopping-over/shopping-over",
+       "pages/replenish-over/replenish-over"
   ],
   "window": {
     "defaultTitle": "智能售货柜"

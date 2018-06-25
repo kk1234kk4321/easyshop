@@ -2,44 +2,34 @@
   <view class="main-wrapper">
     <view class="main-container">
       <view class="container-box">
-          <view class="head-text">
-              <view class="icon-text">
-                    <icon type="success" style="color:green" size="25"/>
+          <view class="head-text" a:if="{{status==0}}">
+            <view a:if="{{cmd==201}}">
+              <view class="icon-text" style="padding-left:20px;">
+                    <icon type="success" color="green" size="23"/>
                     <text style="margin:10px;font-size:20px;color:green;">开门成功，祝您购物愉快！</text>
               </view>
-                    <text style="margin:0px 20px 0px 50px;font-size:15px;color:grey;">
-                        购物完成后，请点击“我的订单”查看本次消费明细</text>
+              <view style="margin:0px 20px 0px 50px;font-size:15px;color:grey;">
+                    购物完成后，请点击“我的订单”查看本次消费明细
+              </view>
+            </view>
+            <view a:elif="{{cmd==301}}">
+                <view class="icon-text">
+                    <icon type="success" color="green" size="23"/>
+                    <text style="margin:10px;font-size:20px;color:green;">开门成功，可以开始补货！</text>
+              </view>
+            </view>      
+          </view>
+          <view a:else>
+            <view  style="padding-top:50px;">
+                <text style="margin:0px 20px 0px 50px;font-size:15px;color:grey;">开门失败，请重新操作。</text>
+            </view>
           </view>
         <view class="box-logo">
           <image src="/image/main.png" mode="widthFix" style="width:100%"/>
         </view>
       </view>
     </view>
-    <view class="main-menu">
-      <view class="menu-line"></view>
-      <view class="menu-box">
-        <view class="box-container" onTap="toMyinfo">
-          <view class="box-icon">
-            <view class="iconfont icon-xinxi" style="font-size:1.4rem;color:#108ee9"></view>
-            <view class="button_text">我的信息</view>
-          </view>
-        </view>
-        <view class="box-container" onTap="toOrder">
-          <view class="box-icon">
-            <view class="iconfont icon-dingdan" style="font-size:1.4rem;color:#31af08"></view>
-            <view class="button_text">我的订单</view>
-          </view>
-        </view>
-        <view class="box-container" onTap="toReplenish">
-          <view class="box-icon">
-            <view class="iconfont icon-buhuo" style="font-size:1.4rem;color:#f4ea2a"></view>
-            <view class="button_text">补货</view>
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
-
-  
+    
+  </view>  
 </view>
 

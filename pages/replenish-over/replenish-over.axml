@@ -1,26 +1,24 @@
 <view class="container">
     <view class="main-wrapper">
         <view class="main-container">
-            <view class="container-box" a:if="{{status==0}}">
+            <view class="container-box"  a:if="{{status==0}}">
                 <view class="head-text">
                     <view class="icon-text">
                             <icon type="success" color="green" size="23"/>
-                            <text style="margin:10px;font-size:20px;color:green;">购物成功</text>
+                            <text style="margin:10px;font-size:20px;color:green;">补货成功</text>
                     </view>
-                            <text style="margin:0px 20px 0px 50px;font-size:15px;color:grey;">
-                                请通过查看订单确认购物详情</text>
-                </view>                
+                </view>
                 <view class="box-logo">
                     <image src="/image/main.png" mode="widthFix" style="width:100%"/>
-                </view> 
+                </view>
                 <view class="box-button">
                         <view class="box-margin">
-                            <button type="primary" onTap="view"> 查看订单列表 </button>
+                            <button type="primary" onTap="view"> 查看补货列表 </button>
                         </view>
                 </view>
             </view>
-            <view  a:else>
-                <view style="padding-top:50px;">
+            <view a:else>
+                <view  style="padding-top:50px;">
                     <text style="margin:0px 20px 0px 50px;font-size:15px;color:grey;">操作异常，请检查门是否已关好。</text>
                 </view>
                 <view class="box-logo">

@@ -72,7 +72,7 @@ Page({
     my.httpRequest({  
         url: 'http://localhost:8080/Temp/formSubmit',  
         data: formData,  
-        method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+        method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
         header: {
           'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
         }, 

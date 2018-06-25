@@ -1,14 +1,17 @@
 <view class="replenish">
-    <view class="view-replenish" a:for="{{array}}" a:for-index="idx" a:for-item="itemX">
-       
-        <view>补货单流水号：{{itemX.replenishId}}</view>
-        <view class="text-grey">完成时间：{{itemX.replenishTime}}</view>
-        <view class="text-grey">补货设备：{{itemX.equipment}}</view>
-        <view class="text-grey">补货地址：{{itemX.equipmentAddr}}</view>
-        <view>
-            <view class="text-green" a:if={{itemX.isSuccess==1}} >完成</view>
-            <view class="text-red" a:elif={{itemX.isSuccess==0}}>未完成</view>
-        </view>
-    </view> 
+    <view a:if="{{array!=null&&array.length>0}}">
+        <view class="view-replenish" a:for="{{array}}" a:for-index="idx" a:for-item="itemX">
+        
+            <view>补货单流水号：{{itemX.replenishId}}</view>
+            <view class="text-grey">完成时间：{{itemX.replenishTime}}</view>
+            <view class="text-grey">补货设备：{{itemX.equipment}}</view>
+            <view class="text-grey">补货地址：{{itemX.equipmentAddr}}</view>
+            <view>
+                <view class="text-green" a:if={{itemX.isSuccess==1}} >完成</view>
+                <view class="text-red" a:elif={{itemX.isSuccess==0}}>未完成</view>
+            </view>
+        </view> 
+    </view>
+    <view class="view-replenish" style="padding-left:50px;color:#A9A9A9" a:else>您当前没有补货信息</view>
     <view class="float-button"><button type="primary" onTap="open">补货开门</button></view>
 </view>

@@ -37,7 +37,7 @@ Page({
   },
 
   onLoad() {
-
+    console.log("app.globalData.userType===>",app.globalData.userType),
     my.getAuthCode({
       scopes: 'auth_base',
       success: (res) => {
@@ -47,10 +47,17 @@ Page({
           "boxId": app.globalData.boxId,
           "cmd": 100 //扫码进入小程序，传递auth_code
         }
-        console.log(res.authCode);
+        console.log("res.authCode===>",res.authCode);
         app.globalData.authCode = res.authCode;
         my.sendSocketMessage({
-          data: JSON.stringify(msg)
+          data: JSON.stringify(msg),
+          success: (res) => {
+              //my.alert({content: '数据发送！' + msg});
+              console.log("数据发送！",msg);
+          },
+          fail:(res) => {
+            console.log("数据发送失败原因",res);
+          }
         });
       },
     });
@@ -58,34 +65,49 @@ Page({
   },
 
   onReady() {
+    var that = this;
     my.onSocketMessage((res) => {
+      console.log("连接数据：onSocketMessage====>",res.data);
       var resdata = JSON.parse(res.data);
+      console.log("收到服务器内容：",resdata);
       if (resdata.cmd == undefined) {
         return;
         my.alert({ content: '收到数据！' + res.data });
       }
       switch (resdata.cmd) {
-        case 101://未签约免密授权
+        case 101://未签约免密授权          
+          app.globalData.userId = resdata.userid;
+          app.globalData.userType = resdata.userType;
           this.dd(resdata.signstr);
           break;
         case 110://已签约
           app.globalData.userId = resdata.userid;
           app.globalData.userType = resdata.userType;
+          that.setData({
+            userType: resdata.userType
+          })  
+          console.log("已签约userid：",app.globalData.userId);
           break;
         case 201://购物开门成功
-          my.alert({ content: 'door is open' });
+         // my.alert({ content: 'door is open' });
+          my.navigateTo({
+            url: 'pages/open-over/open-over?status='+resdata.status+'&cmd=201',
+          });
           break;
         case 301://补货开门成功
-          my.alert({ content: 'door is open' });
+          //my.alert({ content: 'door is open' });
+          my.navigateTo({
+            url: 'pages/open-over/open-over?status='+resdata.status+'&cmd=301',
+          });
           break;
         case 210://购物关门成功
           my.navigateTo({
-            url: '/pages/shopping-over/shopping-over',
+            url: '/pages/shopping-over/shopping-over?status='+resdata.status,
           });
           break;
         case 310://补货关门成功
           my.navigateTo({
-            url: '/pages/shopping-over/shopping-over',
+            url: '/pages/replenish-over/replenish-over?status='+resdata.status,
           });
           break;
         default:
@@ -159,7 +181,7 @@ Page({
       data: JSON.stringify(msg)
     });
 
-  }
+  },
 
 
 
