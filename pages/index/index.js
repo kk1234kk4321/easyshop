@@ -3,10 +3,30 @@ const app = getApp();
 Page({
 
    data: {
-    userType: app.globalData.userType
+    userType: app.globalData.userType,
+    openType:app.globalData.openType
+  },
+
+  palm:function(){
+    let msg = {
+      "cmd":121,
+      "authcode": app.globalData.authCode,
+      "userid":app.globalData.userId,
+      "isRepeat":0
+    }
+    my.sendSocketMessage({
+      data: JSON.stringify(msg),
+      success: (res) => {
+        console.log("注册请求发送成功===>",res);
+      },
+      fail:(res)=>{
+        console.log("注册请求发送失败===>",res)
+      }
+    });
   },
   
   dd: function (signstr) {
+    var that = this;
     my.paySignCenter({
       signStr: signstr,
       success: (res) => {
@@ -19,8 +39,24 @@ Page({
           "sign_time": o.sign_time,
         }
         my.sendSocketMessage({
-          data: JSON.stringify(msg)
+          data: JSON.stringify(msg),
+          success: (res) => {
+            console.log("签约请求发送成功===>",res);
+
+            var openType = app.globalData.openType;
+            if(openType=='palm'){//开门方式为掌静脉，发送注册请求
+              that.palm();
+            }
+          },
+          fail:(res)=>{
+            console.log("签约请求发送失败===>",res)
+          }
         });
+
+        var openType = app.globalData.openType;
+        if(openType=='palm'){//开门方式为掌静脉，发送注册请求
+          that.palm();
+        }
 
       },
       fail: (res) => {
@@ -79,6 +115,7 @@ Page({
           app.globalData.userId = resdata.userid;
           app.globalData.userType = resdata.userType;
           this.dd(resdata.signstr);
+
           break;
         case 110://已签约
           app.globalData.userId = resdata.userid;
@@ -86,8 +123,24 @@ Page({
           that.setData({
             userType: resdata.userType
           })  
+
+          var openType = app.globalData.openType;
+          if(openType=='palm'){//开门方式为掌静脉，发送注册请求
+            that.palm();
+          }
+
           console.log("已签约userid：",app.globalData.userId);
           break;
+        case 121://掌静脉注册
+          my.navigateTo({
+            url: 'pages/register/register?status='+resdata.status,
+          });
+        break;
+        case 221://掌静脉注册成功
+          my.navigateTo({
+            url: 'pages/register-over/register-over?status='+resdata.status,
+          });
+        break;
         case 201://购物开门成功
          // my.alert({ content: 'door is open' });
           my.navigateTo({

@@ -5,7 +5,8 @@ App({
     console.log('启动参数:App Launch', options);
      if(options.query){
      // my.alert({content: '启动参数：'+JSON.stringify(options.query.deviceId)});
-        this.globalData.deviceId = JSON.stringify(options.query.deviceId)
+        this.globalData.deviceId = Number(options.query.deviceId)
+        this.globalData.openType = JSON.stringify(options.query.openType)
      }
     console.log('getSystemInfoSync', my.getSystemInfoSync());
     console.log('SDKVersion', my.SDKVersion);
@@ -43,6 +44,7 @@ App({
     boxId:1,
     userId:"",
     userType:0,
+    openType:''
   },
   userInfo: null,
 

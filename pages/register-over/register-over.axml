@@ -1,0 +1,25 @@
+<view class="container">
+  <view class="main-wrapper">
+    <view class="main-container">
+      <view class="container-box">
+        <view class="head-text">
+            <view class="icon-text" a:if="{{status==0}}">
+                <icon type="success" color="green" size="23"/>
+                <text style="margin:10px;font-size:20px;color:green;">注册成功！</text>
+              </view>
+              <view class="icon-text" a:else>
+                <icon type="warn" color="red" size="23"/>
+                <text style="margin:10px;font-size:20px;color:red;">注册失败！</text>
+            </view>
+        </view>
+        <view class="box-logo">
+          <image src="/image/main.png" mode="widthFix" style="width:100%"/>
+        </view>
+      </view>
+    </view>
+    
+  </view>
+
+  
+</view>
+
