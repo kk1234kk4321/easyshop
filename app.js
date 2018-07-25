@@ -40,11 +40,11 @@ App({
 
   globalData: {
     authCode: "",
-    deviceId:"",
+    deviceId:"",//"99872210",
     boxId:1,
-    userId:"",
+    userId:"",//"2088112422848101",
     userType:0,
-    openType:''
+    openType:''//'palm'
   },
   userInfo: null,
 

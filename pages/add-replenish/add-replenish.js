@@ -49,5 +49,12 @@ Page({
       my.sendSocketMessage({
       data: JSON.stringify(msg)
       });
+  },
+  detail(e){
+    console.log("准备进入补货订单明细页面====",e);
+    var id = e.currentTarget.dataset.replenishId;
+    my.navigateTo({
+      url: `/pages/replenish-detail/replenish-detail?supplyId=`+id,
+    });
   }
 });

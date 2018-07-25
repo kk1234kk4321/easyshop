@@ -9,7 +9,8 @@
        "pages/shopping-over/shopping-over",
        "pages/replenish-over/replenish-over",
        "pages/register-over/register-over",
-       "pages/register/register"
+       "pages/register/register",
+       "pages/replenish-detail/replenish-detail"
   ],
   "window": {
     "defaultTitle": "智能售货柜"

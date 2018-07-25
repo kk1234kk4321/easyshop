@@ -1,7 +1,9 @@
 const app = getApp();
 
 Page({
-  data: {},
+  data: {
+    userId:app.globalData.userId
+  },
   onLoad() {   
 
     app.getUserInfo().then(

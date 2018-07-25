@@ -1,6 +1,6 @@
 <view class="replenish">
     <view a:if="{{array!=null&&array.length>0}}">
-        <view class="view-replenish" a:for="{{array}}" a:for-index="idx" a:for-item="itemX">
+        <view class="view-replenish" a:for="{{array}}" a:for-index="idx" a:for-item="itemX" onTap="detail" data-replenish-id="{{itemX.replenishId}}">
         
             <view>补货单流水号：{{itemX.replenishId}}</view>
             <view class="text-grey">完成时间：{{itemX.replenishTime}}</view>
@@ -14,4 +14,4 @@
     </view>
     <view class="view-replenish" style="padding-left:50px;color:#A9A9A9" a:else>您当前没有补货信息</view>
     <view class="float-button"><button type="primary" onTap="open">补货开门</button></view>
-</view>
+  </view>
