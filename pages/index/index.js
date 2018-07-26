@@ -12,15 +12,17 @@ Page({
       "cmd":121,
       "authcode": app.globalData.authCode,
       "userid":app.globalData.userId,
-      "isRepeat":0
+      "isRepeat":0,
+      "deviceId":app.globalData.deviceId
     }
+    console.log("发送cmd121|掌静脉注册:",msg);
     my.sendSocketMessage({
       data: JSON.stringify(msg),
       success: (res) => {
-        console.log("注册请求发送成功===>",res);
+        console.log("发送cmd121|掌静脉注册成功!");
       },
       fail:(res)=>{
-        console.log("注册请求发送失败===>",res)
+        console.log("发送cmd121|掌静脉注册失败!",res)
       }
     });
   },
@@ -41,7 +43,7 @@ Page({
         my.sendSocketMessage({
           data: JSON.stringify(msg),
           success: (res) => {
-            console.log("签约请求发送成功===>",res);
+            console.log("发送cmd102|免密授权成功发送agreementno：",res);
 
             var openType = app.globalData.openType;
             if(openType=='palm'){//开门方式为掌静脉，发送注册请求
@@ -49,7 +51,7 @@ Page({
             }
           },
           fail:(res)=>{
-            console.log("签约请求发送失败===>",res)
+            console.log("发送cmd102|免密授权成功发送agreementno失败",res)
           }
         });
 
@@ -88,11 +90,10 @@ Page({
         my.sendSocketMessage({
           data: JSON.stringify(msg),
           success: (res) => {
-              //my.alert({content: '数据发送！' + msg});
-              console.log("数据发送！",msg);
+              console.log("发送cmd100|扫码传递authcode：",msg);
           },
           fail:(res) => {
-            console.log("数据发送失败原因",res);
+            console.log("发送cmd100|扫码传递authcode失败！",res);
           }
         });
       },
@@ -103,12 +104,10 @@ Page({
   onReady() {
     var that = this;
     my.onSocketMessage((res) => {
-      console.log("连接数据：onSocketMessage====>",res.data);
+      console.log("收到数据：",res.data);
       var resdata = JSON.parse(res.data);
-      console.log("收到服务器内容：",resdata);
       if (resdata.cmd == undefined) {
         return;
-        my.alert({ content: '收到数据！' + res.data });
       }
       switch (resdata.cmd) {
         case 101://未签约免密授权          
@@ -133,24 +132,24 @@ Page({
           break;
         case 121://掌静脉注册
           my.navigateTo({
-            url: 'pages/register/register?status='+resdata.status,
+            url: '/pages/register/register?status='+resdata.status,
           });
         break;
         case 221://掌静脉注册成功
           my.navigateTo({
-            url: 'pages/register-over/register-over?status='+resdata.status,
+            url: '/pages/register-over/register-over?status='+resdata.status,
           });
         break;
         case 201://购物开门成功
          // my.alert({ content: 'door is open' });
           my.navigateTo({
-            url: 'pages/open-over/open-over?status='+resdata.status+'&cmd=201',
+            url: '/pages/open-over/open-over?status='+resdata.status+'&cmd=201',
           });
           break;
         case 301://补货开门成功
           //my.alert({ content: 'door is open' });
           my.navigateTo({
-            url: 'pages/open-over/open-over?status='+resdata.status+'&cmd=301',
+            url: '/pages/open-over/open-over?status='+resdata.status+'&cmd=301',
           });
           break;
         case 210://购物关门成功
