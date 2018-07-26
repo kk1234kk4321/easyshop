@@ -11,21 +11,22 @@ Page({
   //重新注册
   reRegister(e){
     let msg = {
-      "cmd":121,
+      "cmd":122,
       "authcode": app.globalData.authCode,
       "userid":app.globalData.userId,
-      "isRepeat":1
+      "deviceId":app.globalData.deviceId
     }
+    console.log("发送cmd122|掌静脉重新注册:",msg);
     my.sendSocketMessage({
       data: JSON.stringify(msg),
       success: (res) => {
-        console.log("重新注册请求发送成功===>",res);
-        my.navigateTo({
-          url: 'pages/index/index',
-        });
+        console.log("send cmd122 success");
+        // my.navigateTo({
+        //   url: '/pages/index/index',
+        // });
       },
       fail:(res)=>{
-        console.log("重新注册请求发送失败===>",res)
+        console.log("send cmd122 fail",res)
       }
     });
   }

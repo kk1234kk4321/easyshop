@@ -4,7 +4,7 @@
       <view class="container-box">
         <view class="head-text">
             <view class="icon-text">
-                <text style="margin:10px;font-size:20px;color:gray;">注册中，请稍候。</text>
+                <text style="margin:10px;font-size:20px;color:gray;">已注册，是否重新注册</text>
             </view>
         </view>
         <view class="box-logo">

@@ -13,7 +13,7 @@ App({
 
     my.connectSocket({
       //url: 'ws://localhost:8080/WebsocketHome/actions', // 开发者服务器接口地址，必须是 wss 协议，且域名必须是后台配置的合法域名
-      url: 'ws://222.186.101.234:8090/erpLife/socket/websocket'
+      //url: 'ws://222.186.101.234:8090/erpLife/socket/websocket'
       //url: 'ws://erp.zhangyuanzhineng.com:8080/erpLife/socket/websocket'
     })
 

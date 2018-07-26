@@ -12,17 +12,16 @@ Page({
       "cmd":121,
       "authcode": app.globalData.authCode,
       "userid":app.globalData.userId,
-      "isRepeat":0,
       "deviceId":app.globalData.deviceId
     }
     console.log("发送cmd121|掌静脉注册:",msg);
     my.sendSocketMessage({
       data: JSON.stringify(msg),
       success: (res) => {
-        console.log("发送cmd121|掌静脉注册成功!");
+        console.log("send cmd121 success");
       },
       fail:(res)=>{
-        console.log("发送cmd121|掌静脉注册失败!",res)
+        console.log("send cmd121 fail",res)
       }
     });
   },
@@ -43,15 +42,14 @@ Page({
         my.sendSocketMessage({
           data: JSON.stringify(msg),
           success: (res) => {
-            console.log("发送cmd102|免密授权成功发送agreementno：",res);
-
+            console.log("send cmd102 success");
             var openType = app.globalData.openType;
             if(openType=='palm'){//开门方式为掌静脉，发送注册请求
               that.palm();
             }
           },
           fail:(res)=>{
-            console.log("发送cmd102|免密授权成功发送agreementno失败",res)
+            console.log("send cmd102 fail",res)
           }
         });
 
@@ -85,15 +83,15 @@ Page({
           "boxId": app.globalData.boxId,
           "cmd": 100 //扫码进入小程序，传递auth_code
         }
-        console.log("res.authCode===>",res.authCode);
         app.globalData.authCode = res.authCode;
+        console.log("发送cmd100|扫码",msg);
         my.sendSocketMessage({
           data: JSON.stringify(msg),
           success: (res) => {
-              console.log("发送cmd100|扫码传递authcode：",msg);
+              console.log("send cmd100 success");
           },
           fail:(res) => {
-            console.log("发送cmd100|扫码传递authcode失败！",res);
+            console.log("send cmd100 fail",res);
           }
         });
       },
@@ -131,9 +129,18 @@ Page({
           console.log("已签约userid：",app.globalData.userId);
           break;
         case 121://掌静脉注册
-          my.navigateTo({
-            url: '/pages/register/register?status='+resdata.status,
+          if(resdata.status==0){//可以注册
+           
+
+          }else if(resdata.status==1){//已注册是否重新注册
+              my.navigateTo({
+                url: '/pages/register/register?status='+resdata.status,
           });
+
+          }else if(resdata.status==2){//无法注册
+              
+          }
+         
         break;
         case 221://掌静脉注册成功
           my.navigateTo({
