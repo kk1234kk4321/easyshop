@@ -21,9 +21,10 @@ Page({
       data: JSON.stringify(msg),
       success: (res) => {
         console.log("send cmd122 success");
-        // my.navigateTo({
-        //   url: '/pages/index/index',
-        // });
+        //调到注册中页面
+        my.navigateTo({
+            url: '/pages/registering/registering',
+        });
       },
       fail:(res)=>{
         console.log("send cmd122 fail",res)

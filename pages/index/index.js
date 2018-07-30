@@ -104,9 +104,9 @@ Page({
     my.onSocketMessage((res) => {
       console.log("收到数据：",res.data);
       var resdata = JSON.parse(res.data);
-      if (resdata.cmd == undefined) {
-        return;
-      }
+//      if (typeof(resdata.cmd) == undefined) {
+  //      return;
+    //  }
       switch (resdata.cmd) {
         case 101://未签约免密授权          
           app.globalData.userId = resdata.userid;
@@ -121,27 +121,46 @@ Page({
             userType: resdata.userType
           })  
 
+          console.log("已签约userid：",app.globalData.userId);
+
           var openType = app.globalData.openType;
           if(openType=='palm'){//开门方式为掌静脉，发送注册请求
             that.palm();
           }
-
-          console.log("已签约userid：",app.globalData.userId);
           break;
         case 121://掌静脉注册
           if(resdata.status==0){//可以注册
-           
+            //调到注册中页面
+            my.navigateTo({
+                url: '/pages/registering/registering',
+            });
 
           }else if(resdata.status==1){//已注册是否重新注册
-              my.navigateTo({
+            my.navigateTo({
                 url: '/pages/register/register?status='+resdata.status,
-          });
+            });
 
           }else if(resdata.status==2){//无法注册
-              
-          }
-         
+              my.navigateTo({
+                url: '/pages/register-fail/register-fail',
+            });
+          }         
         break;
+
+        case 122://掌静脉重新注册
+          if(resdata.status==0){//可以注册
+            //调到注册中页面
+            my.navigateTo({
+                url: '/pages/registering/registering',
+            });
+
+          }else if(resdata.status==2){//无法注册
+              my.navigateTo({
+                url: '/pages/register-fail/register-fail',
+            });
+          }         
+        break;
+        
         case 221://掌静脉注册成功
           my.navigateTo({
             url: '/pages/register-over/register-over?status='+resdata.status,

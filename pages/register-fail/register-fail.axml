@@ -1,0 +1,20 @@
+<view class="container">
+  <view class="main-wrapper">
+    <view class="main-container">
+      <view class="container-box">
+        <view class="head-text">
+            <view class="icon-text">
+                <text style="margin:10px;font-size:20px;color:gray;">网络问题暂时无法注册，请稍候！</text>
+            </view>
+        </view>
+        <view class="box-logo">
+          <image src="/image/main.png" mode="widthFix" style="width:100%"/>
+        </view>
+      </view>
+    </view>
+    
+  </view>
+
+  
+</view>
+
