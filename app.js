@@ -4,16 +4,21 @@ App({
     //my.alert({content: '启动参数：'+JSON.stringify(options.query)});
     console.log('启动参数:App Launch', options);
      if(options.query){
-     // my.alert({content: '启动参数：'+JSON.stringify(options.query.deviceId)});
-       this.globalData.deviceId = Number(options.query.deviceId)
-        this.globalData.openType = JSON.stringify(options.query.openType)
+        if(options.query.deviceId){
+        this.globalData.deviceId = Number(options.query.deviceId)
+        }
+        if(options.query.openType){
+       this.globalData.openType = JSON.stringify(options.query.openType)
+        }
+        console.log("参数openType",options.query.openType);
+        console.log("参数openType",options.query.deviceId);
      }
     console.log('getSystemInfoSync', my.getSystemInfoSync());
     console.log('SDKVersion', my.SDKVersion);
 
     my.connectSocket({
       //url: 'ws://localhost:8080/WebsocketHome/actions', // 开发者服务器接口地址，必须是 wss 协议，且域名必须是后台配置的合法域名
-      // url: 'ws://222.186.101.234:8090/erpLife/socket/websocket'
+      //url: 'ws://222.186.101.234:8090/erpLife/socket/websocket'
       url: 'ws://erp.zhangyuanzhineng.com:8080/erpLife/socket/websocket'
     })
 
@@ -40,11 +45,11 @@ App({
 
   globalData: {
     authCode: "",
-    deviceId:"",//99872212,
+    deviceId:0,//99872212,
     boxId:1,
     userId:"",//"2088902710839148",//"2088112422848101",
     userType:0,
-    openType:''
+    openType:"",//'palm'
   },
   userInfo: null,
 
