@@ -1,10 +1,15 @@
 const app = getApp();
 
 Page({
-
-   data: {
-    userType: app.globalData.userType,
-    openType:app.globalData.openType
+  data: {
+       userType: app.globalData.userType,
+       openType:app.globalData.openType
+  },
+  changeData(){
+    this.setData({
+       userType: app.globalData.userType,
+       openType:app.globalData.openType
+    })
   },
 
   palm:function(){
@@ -44,7 +49,7 @@ Page({
           success: (res) => {
             console.log("send cmd102 success");
             var openType = app.globalData.openType;
-            if(openType=='palm'){//开门方式为掌静脉，发送注册请求
+            if(openType=="palm"){//开门方式为掌静脉，发送注册请求
               that.palm();
             }
           },
@@ -73,7 +78,8 @@ Page({
   },
 
   onLoad() {
-    console.log("app.globalData.userType===>",app.globalData.userType),
+
+    this.changeData();
     my.getAuthCode({
       scopes: 'auth_base',
       success: (res) => {
@@ -100,13 +106,13 @@ Page({
   },
 
   onReady() {
+
+
     var that = this;
     my.onSocketMessage((res) => {
       console.log("收到数据：",res.data);
       var resdata = JSON.parse(res.data);
-//      if (typeof(resdata.cmd) == undefined) {
-  //      return;
-    //  }
+
       switch (resdata.cmd) {
         case 101://未签约免密授权          
           app.globalData.userId = resdata.userid;

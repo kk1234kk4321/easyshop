@@ -5,13 +5,13 @@ App({
     console.log('启动参数:App Launch', options);
      if(options.query){
         if(options.query.deviceId){
-        this.globalData.deviceId = Number(options.query.deviceId)
+        this.globalData.deviceId = Number(options.query.deviceId);
         }
         if(options.query.openType){
-       this.globalData.openType = JSON.stringify(options.query.openType)
+          this.globalData.openType = options.query.openType;
         }
-        console.log("参数openType",options.query.openType);
-        console.log("参数openType",options.query.deviceId);
+        console.log("参数deviceId",this.globalData.deviceId);
+        console.log("参数openType",this.globalData.openType);
      }
     console.log('getSystemInfoSync', my.getSystemInfoSync());
     console.log('SDKVersion', my.SDKVersion);
@@ -49,7 +49,7 @@ App({
     boxId:1,
     userId:"",//"2088902710839148",//"2088112422848101",
     userType:0,
-    openType:"",//'palm'
+    openType:''//"palm"
   },
   userInfo: null,
 
