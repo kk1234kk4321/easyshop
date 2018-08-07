@@ -11,7 +11,7 @@ Page({
           'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
         }, 
         data: {
-          userZfbId: '2088112422848101'//app.globalData.userId,
+          userZfbId: app.globalData.userId,
         },
         success: function(res) {  
           console.log("res====>",res);
