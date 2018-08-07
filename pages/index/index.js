@@ -80,29 +80,6 @@ Page({
   onLoad() {
 
     this.changeData();
-    my.getAuthCode({
-      scopes: 'auth_base',
-      success: (res) => {
-        let msg = {
-          "authcode": res.authCode,
-          "deviceId": app.globalData.deviceId,
-          "boxId": app.globalData.boxId,
-          "cmd": 100 //扫码进入小程序，传递auth_code
-        }
-        app.globalData.authCode = res.authCode;
-        console.log("发送cmd100|扫码",msg);
-        my.sendSocketMessage({
-          data: JSON.stringify(msg),
-          success: (res) => {
-              console.log("send cmd100 success");
-          },
-          fail:(res) => {
-            console.log("send cmd100 fail",res);
-          }
-        });
-      },
-    });
-
   },
 
   onReady() {

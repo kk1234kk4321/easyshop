@@ -32,6 +32,30 @@ App({
 
     my.onSocketOpen((res) => {
       console.log("连接已经打开",res);
+
+      my.getAuthCode({
+      scopes: 'auth_base',
+      success: (res) => {
+        let msg = {
+          "authcode": res.authCode,
+          "deviceId": this.globalData.deviceId,
+          "boxId": this.globalData.boxId,
+          "cmd": 100 //扫码进入小程序，传递auth_code
+        }
+        this.globalData.authCode = res.authCode;
+        console.log("发送cmd100|扫码",msg);
+        my.sendSocketMessage({
+          data: JSON.stringify(msg),
+          success: (res) => {
+              console.log("send cmd100 success");
+          },
+          fail:(res) => {
+            console.log("send cmd100 fail",res);
+          }
+        });
+      },
+    });
+    
     });
 
     my.onSocketError(function (res) {
