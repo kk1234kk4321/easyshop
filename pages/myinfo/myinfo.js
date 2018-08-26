@@ -5,7 +5,9 @@ Page({
     userId:app.globalData.userId
   },
   onLoad() {   
-
+    this.setData({
+      userId:app.globalData.userId
+    });
     app.getUserInfo().then(
       user => this.setData({
         user,

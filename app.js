@@ -5,7 +5,7 @@ App({
     console.log('启动参数:App Launch', options);
      if(options.query){
         if(options.query.deviceId){
-        this.globalData.deviceId = Number(options.query.deviceId);
+        this.globalData.deviceId = options.query.deviceId;
         }
         if(options.query.openType){
           this.globalData.openType = options.query.openType;
@@ -69,7 +69,7 @@ App({
 
   globalData: {
     authCode: "",
-    deviceId:0,//99872212,
+    deviceId:"",//99872212,
     boxId:1,
     userId:"",//"2088902710839148",//"2088112422848101",
     userType:0,
