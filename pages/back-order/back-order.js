@@ -2,28 +2,28 @@ const app = getApp();
 
 Page({
 
-  data:{
-    path:[]
+  data: {
+    path: []
   },
   onLoad(res) {
-    
-    var addColor='#A9A9A9';
-    var minusColor='#A9A9A9';
-    if(res.currCount<res.count){
-      addColor='black';
+
+    var addColor = '#A9A9A9';
+    var minusColor = '#A9A9A9';
+    if (res.currCount < res.count) {
+      addColor = 'black';
     }
-    if(res.currCount>0&&res.currCount<=res.count){
-      minusColor='black'
+    if (res.currCount > 0 && res.currCount <= res.count) {
+      minusColor = 'black'
     }
-    
+
     this.setData({
-        data:res,
-        addColor:addColor,
-        minusColor:minusColor,
-      });
-      
+      data: res,
+      addColor: addColor,
+      minusColor: minusColor,
+    });
+
   },
-  add(event){
+  add(event) {
     var data = event.target.dataset;
     var count = data.count;
     var unitPrice = data.unitPrice;
@@ -31,66 +31,93 @@ Page({
     var currCount = data.currCount;
     var currPrice = data.currPrice;
 
-    if(currCount<count){
-      currCount=currCount+1;
-      currPrice = parseFloat(currPrice)+parseFloat(unitPrice);
+    if (currCount < count) {
+      currCount = currCount + 1;
+      currPrice = parseFloat(currPrice) + parseFloat(unitPrice);
       data.currCount = currCount;
       data.currPrice = currPrice;
       this.onLoad(data);
     }
 
   },
-  minus(event){
+  minus(event) {
     var data = event.target.dataset;
     var count = data.count;
     var unitPrice = data.unitPrice;
     var totalPrice = data.totalPrice;
     var currCount = data.currCount;
     var currPrice = data.currPrice;
-    
-    if(currCount>0&&currCount<=count){
-      currCount=currCount-1;
-      currPrice=currPrice-unitPrice;
+
+    if (currCount > 0 && currCount <= count) {
+      currCount = currCount - 1;
+      currPrice = currPrice - unitPrice;
       data.currCount = currCount;
       data.currPrice = currPrice;
       this.onLoad(data);
     }
-    
+
   },
-  formSubmit(e){
-    var formData = e.detail.value; 
+  formSubmit(e) {
+    var formData = e.detail.value;
     console.log('form发生了submit事件，携带数据为：', e.detail.value);
 
+    if (formData.count == 0) {
+      my.alert({
+        title: '注意', // alert 框的标题
+        content: "退款商品数不能为0",
+      });
+      return
+    }
+    if (!formData.userAlipay) {
+      my.alert({
+        title: '注意', // alert 框的标题
+        content: "请填写接收退款的支付宝账号",
+      });
+      return
+    }
     var successUp = 0; //成功个数
     var failUp = 0; //失败个数
     var len = formData.paths.length; //总共个数
     var i = 0; //第几个
-    if(len>0){
-      this.uploadDIY(formData.paths,successUp,failUp,i,len);
+    if (len > 0) {
+      this.uploadDIY(formData.paths, successUp, failUp, i, len, formData);
     }
-    
-    my.httpRequest({  
-        url: 'http://localhost:8080/Temp/formSubmit',  
-        data: formData,  
-        method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-        header: {
-          'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
-        }, 
-        success: function() {  
-          my.alert({
-            content: '操作成功！'
+    var jsonobj = {
+      "deviceId": app.globalData.deviceId,
+      "backDescr": formData.backDescr,
+      "count": formData.count,
+      "id": formData.id,
+      "orderId": formData.orderId,
+      "userAlipay": formData.userAlipay
+    }
+    my.httpRequest({
+      url:  'http://erp.zhangyuanzhineng.com:8080/erpLife/out/userRefund.do',
+      data: {
+        refundJson: JSON.stringify(jsonobj)
+      },
+      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      header: {
+        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      },
+      success: function() {
+        my.alert({
+          title: '退款',
+          content: '提交成功',
+          buttonText: '确定',
+          success: () => {
+          my.navigateTo({
+            url: `/pages/add-order/add-order`,
           });
-          my.navigateBack({
-            delta: 1
-          });
-        },
-        fail:function(res){
-          //console.log('失败原因：',res.data);
-          my.alert({
-            content: '操作失败，请重新操作！'
-          });
-        }  
-    }); 
+          },
+        });
+      },
+      fail: function(res) {
+        //console.log('失败原因：',res.data);
+        my.alert({
+          content: '操作失败，请重新操作！'
+        });
+      }
+    });
 
   },
 
@@ -101,35 +128,38 @@ Page({
    * failUp是上传失败的个数
    * i是文件路径数组的指标
    * length是文件路径数组的长度
-   */      
-    uploadDIY(filePaths,successUp,failUp,i,length){
-      my.uploadFile({
-                    url: 'http://localhost:8080/Temp/uploadFile', 
-                    filePath: filePaths[i],
-                    fileName: Date.parse(new Date()),
-                    fileType:'image',
-                    /*formData:{
-                      'pictureUid': owerId,
-                      'pictureAid': albumId
-                    },*/
-                    success: (resp) => {
-                        successUp++;
-                    },
-                    fail: (res) => {
-                        failUp ++;
-                    },
-                    complete: () => {
-                        i ++;                        
-                        if(i == length)
-                        {                      
-                          //my.alert({content:'总共'+successUp+'张上传成功,'+failUp+'张上传失败！'});
-                        }
-                        else
-                        {  //递归调用uploadDIY函数
-                            this.uploadDIY(filePaths,successUp,failUp,i,length);
-                        }
-                    },
-                });
+   */
+  uploadDIY(filePaths, successUp, failUp, i, length, formData) {
+    my.uploadFile({
+      url: 'http://erp.zhangyuanzhineng.com:8080/erpLife/out/userPicUpload.do',
+      filePath: filePaths[i],
+      fileName: 'uploads',
+      fileType: 'image',
+      header: {
+        "Content-Type": "multipart/form-data"
+      },
+      formData: {
+        'orderId': formData.orderId,
+        'id': formData.id
+      },
+      success: (res) => {
+        successUp++;
+        console.log("success" + successUp);
+      },
+      fail: (res) => {
+        failUp++;
+        console.log(res);
+      },
+      complete: () => {
+        i++;
+        if (i == length) {
+          //my.alert({content:'总共'+successUp+'张上传成功,'+failUp+'张上传失败！'});
+        }
+        else {  //递归调用uploadDIY函数
+          this.uploadDIY(filePaths, successUp, failUp, i, length, formData);
+        }
+      },
+    });
   },
 
   uploadImg() {
@@ -144,17 +174,11 @@ Page({
         this.setData({
           "path": path
         });
-
-       // var successUp = 0; //成功个数
-       // var failUp = 0; //失败个数
-       // var len = res.apFilePaths.length; //总共个数
-       // var i = 0; //第几个
-       // this.uploadDIY(res.apFilePaths,successUp,failUp,i,len);
       },
     });
   },
 
-  showImg: function (event) {
+  showImg: function(event) {
     var url = event.target.dataset.url;
     my.previewImage({
       urls: [
@@ -164,7 +188,7 @@ Page({
   },
 
 
-  removeImg: function (event) {
+  removeImg: function(event) {
     var idx = event.target.dataset.idx;
     var path = this.data.path;
     path.splice(idx, 1)

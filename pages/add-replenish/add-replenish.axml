@@ -3,13 +3,11 @@
         <view class="view-replenish" a:for="{{array}}" a:for-index="idx" a:for-item="itemX" onTap="detail" data-replenish-id="{{itemX.replenishId}}">
         
             <view>补货单流水号：{{itemX.replenishId}}</view>
-            <view class="text-grey">完成时间：{{itemX.replenishTime}}</view>
+            <view class="text-grey">补货时间：{{itemX.replenishTime}}</view>
             <view class="text-grey">补货设备：{{itemX.equipment}}</view>
             <view class="text-grey">补货地址：{{itemX.equipmentAddr}}</view>
-            <view>
-                <view class="text-green" a:if={{itemX.isSuccess==1}} >完成</view>
-                <view class="text-red" a:elif={{itemX.isSuccess==0}}>未完成</view>
-            </view>
+            <view class="text-red" a:if="{{itemX.exceptionSupply>0}}" > 补货异常数量：{{itemX.exceptionSupply}}</view>
+            <view class="text-red" a:if="{{itemX.exceptionSupplyRecall>0}}" > 撤货异常数量：{{itemX.exceptionSupplyRecall}}</view>
         </view> 
     </view>
     <view class="view-replenish" style="padding-left:50px;color:#A9A9A9" a:else>您当前没有补货信息</view>

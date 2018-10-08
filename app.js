@@ -20,6 +20,7 @@ App({
       //url: 'ws://localhost:8080/WebsocketHome/actions', // 开发者服务器接口地址，必须是 wss 协议，且域名必须是后台配置的合法域名
       //url: 'ws://222.186.101.234:8090/erpLife/socket/websocket'
       url: 'ws://erp.zhangyuanzhineng.com:8080/erpLife/socket/websocket'
+      //url: 'ws://192.168.1.115:8080/erpLife/socket/websocket'
     })
 
   },
@@ -69,7 +70,7 @@ App({
 
   globalData: {
     authCode: "",
-    deviceId:"",//99872212,
+    deviceId:"100200100002",//99872212,
     boxId:1,
     userId:"",//"2088902710839148",//"2088112422848101",
     userType:0,

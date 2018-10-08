@@ -5,7 +5,9 @@
         <view class="view-replenish" a:for="{{array}}" a:for-index="idx" a:for-item="itemX" onTap="detail" data-replenish-id="{{itemX.replenishId}}">
         
             <view class="text-grey">商品名称：{{itemX.goodsName}}</view>
-            <view class="text-grey">补货数量：{{itemX.goodsNumber}}</view>
+            <view class="text-grey" a:if={{itemX.flag==0}} >撤货数量：{{itemX.goodsNumber}}</view>
+            <view class="text-grey" a:if={{itemX.flag==1}} >补货数量：{{itemX.goodsNumber}}</view>
+
         </view> 
     </view>
     <view class="view-replenish" style="padding-left:50px;color:#A9A9A9" a:else>您当前没有补货明细信息</view>

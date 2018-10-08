@@ -49,6 +49,13 @@
                 <text style="color:red;padding: 10px;">¥{{data.currPrice}}</text>
             </view>
         </view>
+         <view class="container-layer"></view>
+        <view class="mod-goods">
+            <view  class="left">支付宝账号</view>
+            <view>
+                <input  class="user-alipay" name="userAlipay" type="text" maxlength="30" placeholder="请输入支付宝账号"></input>
+            </view>
+        </view>
         <view class="container-layer"></view>
         <view class="mod-photouploader">
             <view class="mod-text">上传凭证</view>
