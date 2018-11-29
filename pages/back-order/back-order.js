@@ -91,7 +91,7 @@ Page({
       "userAlipay": formData.userAlipay
     }
     my.httpRequest({
-      url:  'http://erp.zhangyuanzhineng.com:8080/erpLife/out/userRefund.do',
+      url: app.globalData.erpUrl +'erpLife/out/userRefund.do',
       data: {
         refundJson: JSON.stringify(jsonobj)
       },
@@ -131,7 +131,7 @@ Page({
    */
   uploadDIY(filePaths, successUp, failUp, i, length, formData) {
     my.uploadFile({
-      url: 'http://erp.zhangyuanzhineng.com:8080/erpLife/out/userPicUpload.do',
+      url: app.globalData.erpUrl +'erpLife/out/userPicUpload.do',
       filePath: filePaths[i],
       fileName: 'uploads',
       fileType: 'image',
