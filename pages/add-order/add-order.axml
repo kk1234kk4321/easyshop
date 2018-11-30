@@ -34,4 +34,8 @@
         </view> 
     </view>
     <view  class="view-order" style="padding-left:50px;color:#A9A9A9" a:else>您当前还没有购物信息</view>
+
+    <view class="float-button">
+  <button type="primary" onTap="toIndex">返回首页</button>
+</view>
 </view>

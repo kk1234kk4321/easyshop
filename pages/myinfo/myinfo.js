@@ -14,6 +14,7 @@ Page({
         user,
       }),
     );
+    console.log("user===>",this.data)
     
   },
 
@@ -35,6 +36,11 @@ Page({
           },
         });
       },
+    });
+  },
+  toIndex() {
+    my.reLaunch({
+      url: '/pages/index/index', // 页面路径。如果页面不为 tabbar 页面则路径后可以带参数。参数规则如下：路径与参数之间使用
     });
   }
 });

@@ -78,22 +78,36 @@ App({
   },
   userInfo: null,
 
-  getUserInfo() {
+ getUserInfo() {
     return new Promise((resolve, reject) => {
       if (this.userInfo) resolve(this.userInfo);
-      my.getAuthUserInfo({
-        success: (res) => {
-          this.userInfo = res;
-          resolve(this.userInfo);
+      // 调用用户授权 api 获取用户信息
+      my.getAuthCode({
+        scopes: ['auth_user'],
+        success: (authcode) => {
+          console.info(authcode);
+
+          my.getAuthUserInfo({
+            // scopes: ['auth_base'],
+            success: (res) => {
+              this.userInfo = res;
+              console.log("userinf",this.userInfo)
+              resolve(this.userInfo);
+            },
+            fail: () => { 
+              console.log("获取信息失败")
+              reject({});
+            },
+          });
         },
-        fail: () => {
+        fail: () => { 
           reject({});
         },
       });
     });
   },
 
-
+ 
 
 
 

@@ -30,4 +30,8 @@
     </view>
     </view>
   </view>
+   
+<view class="float-button">
+  <button type="primary" onTap="toIndex">返回首页</button>
+</view>
 </view>
