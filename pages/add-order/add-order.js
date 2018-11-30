@@ -5,7 +5,7 @@ Page({
      console.log("app.globalData.userId===>",app.globalData.userId);
      var that = this;
      my.httpRequest({  
-        url: 'http://erp.zhangyuanzhineng.com:8080/erpLife/out/userSalesQuery.do',
+        url: app.globalData.erpUrl + 'erpLife/out/userSalesQuery.do',
         method: 'GET',
         header: {
           'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'

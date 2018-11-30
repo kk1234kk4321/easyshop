@@ -5,7 +5,7 @@ Page({
     var that = this;
     console.log('补货列表请求，userid===>',app.globalData.userId)
      my.httpRequest({  
-        url: 'http://erp.zhangyuanzhineng.com:8080/erpLife/out/userSupplyQuery.do',
+        url: app.globalData.erpUrl +'erpLife/out/userSupplyQuery.do',
         method: 'GET',
         header: {
           'content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
