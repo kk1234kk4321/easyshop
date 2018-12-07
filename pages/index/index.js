@@ -7,7 +7,8 @@ Page({
   },
   changeData(){
     this.setData({
-       openType:app.globalData.openType
+       openType:app.globalData.openType,
+       userType:app.globalData.userType
     })
   },
 
