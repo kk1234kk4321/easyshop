@@ -8,7 +8,7 @@ App({
       var link = options.query.qrCode;
       console.log("参数link", link);
       if (link) {
-        var regex = /\/deviceId\/(\S*)\//;
+        var regex = /\/deviceId\/(\S*)\/openType/;
         var result;
         if ((result = regex.exec(link)) != null) {
           this.globalData.deviceId = result[1];
